@@ -48,7 +48,7 @@ const fetchGraphQL= (params) =>{
 function App() {
 
   const [data, setData] = useState(
-      // can read from server {cartID:'wTOPiuPEKGUm5qvyzJKv0OKfUUomCYcD'}
+      // can read Cart from server {cartID:'wTOPiuPEKGUm5qvyzJKv0OKfUUomCYcD'}
   )
   const [resultCountries, reexecuteCountries] = useQuery({
     query: GET_COUNTRIES,
