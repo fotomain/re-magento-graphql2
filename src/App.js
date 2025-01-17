@@ -1,8 +1,19 @@
-import Table from "./components/Table";
+
 import { useQuery } from "urql";
-import GET_COUNTRIES from "./graphql/queries/getCountries";
+
 import { useEffect, useState } from "react";
-import {selectionSetMatchesResult} from "@apollo/client/cache/inmemory/helpers";
+
+const GET_COUNTRIES = `
+  query {
+  countries {
+    full_name_english
+    full_name_locale
+    id
+    three_letter_abbreviation
+    two_letter_abbreviation
+  }
+}
+`;
 
 // https://developer.adobe.com/commerce/webapi/graphql/tutorials/checkout/add-product-to-cart/
 // https://developer.adobe.com/commerce/webapi/graphql/schema/cart/mutations/update-items/
