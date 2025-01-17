@@ -16,6 +16,8 @@ const GET_COUNTRIES = `
 `;
 
 // https://developer.adobe.com/commerce/webapi/graphql/tutorials/checkout/add-product-to-cart/
+// !!!!! if addSimpleProductsToCart existing product -> quantity+1 to Cart
+// !!!!! table "sales_flat_quote"
 // https://developer.adobe.com/commerce/webapi/graphql/schema/cart/mutations/update-items/
 // https://developer.adobe.com/commerce/webapi/graphql/schema/cart/mutations/remove-item/
 
@@ -45,9 +47,10 @@ const fetchGraphQL= (params) =>{
 
 function App() {
 
-  const [data, setData] = useState()
-  const [keys, setKeys] = useState()
-  const [result, reexecuteQuery] = useQuery({
+  const [data, setData] = useState(
+      // can read from server {cartID:'wTOPiuPEKGUm5qvyzJKv0OKfUUomCYcD'}
+  )
+  const [resultCountries, reexecuteCountries] = useQuery({
     query: GET_COUNTRIES,
   });
         useEffect(() => {
@@ -467,10 +470,13 @@ function App() {
         <div>cartID {data?.cartID}</div>
 
         <div>cart_items</div>
-        <div>{JSON.stringify(data?.cart_items)}</div>
+        <div style={{textAlign:'center',fontWeight: 'bold'}}>{JSON.stringify(data?.cart_items)}</div>
 
-        <div>products {data?.products?.items.length}</div>
-        <div>countries {data?.countries.length}</div>
+        <div>resultCountries</div>
+        <div style={{fontWeight: 'bold'}}>{JSON.stringify(resultCountries?.data?.countries?.length)}</div>
+
+        <div>products {data?.products?.items?.length}</div>
+        <div>countries {data?.countries?.length}</div>
         {/*<div>{JSON.stringify(data)}</div>*/}
         <br/>
         {(!data?.countries)?'no data':
